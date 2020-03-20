@@ -43,6 +43,7 @@ module uc(input wire clk, input wire [5:0] opcode, input wire s_z, s_n, output r
             begin
                 // 6 bits (saltos)
                 case (opcode)
+		    // J
                     6'b110000:
                     begin
                         s_inc <= 1'b0;
@@ -54,6 +55,7 @@ module uc(input wire clk, input wire [5:0] opcode, input wire s_z, s_n, output r
                         push <= 1'b0;
                         pop <= 1'b0;
                     end
+		    // JZ
                     6'b110001:
                     begin
                         if (s_z == 1'b1)
@@ -68,6 +70,7 @@ module uc(input wire clk, input wire [5:0] opcode, input wire s_z, s_n, output r
                         push <= 1'b0;
                         pop <= 1'b0;
                     end
+		    // JNZ
                     6'b110010:
                     begin
                         if (s_z == 1'b0)
@@ -82,6 +85,7 @@ module uc(input wire clk, input wire [5:0] opcode, input wire s_z, s_n, output r
                         push <= 1'b0;
                         pop <= 1'b0;
                     end
+                    // JN
                     6'b110011:
                     begin
                         if (s_n == 1'b1)
@@ -96,6 +100,7 @@ module uc(input wire clk, input wire [5:0] opcode, input wire s_z, s_n, output r
                         push <= 1'b0;
                         pop <= 1'b0;
                     end
+		    // PUSH
                     6'b110100:
                     begin
                         s_inc <= 1'b1;
@@ -107,6 +112,7 @@ module uc(input wire clk, input wire [5:0] opcode, input wire s_z, s_n, output r
                         pop <= 1'b0;
                         push <= 1'b1;
                     end
+		    // POP
                     6'b110101:
                     begin
                         s_inc <= 1'b0;
@@ -118,6 +124,7 @@ module uc(input wire clk, input wire [5:0] opcode, input wire s_z, s_n, output r
                         pop <= 1'b1;
                         push <= 1'b0;
                     end
+		    // SKZ
                     6'b110110:
                     begin
                         s_inc <= 1'b1;
@@ -131,6 +138,7 @@ module uc(input wire clk, input wire [5:0] opcode, input wire s_z, s_n, output r
                         if (s_z == 1'b1)
                             skip <= 1'b1;
                     end
+		    // SKNZ
                     6'b110111:
                     begin
                         s_inc <= 1'b1;
